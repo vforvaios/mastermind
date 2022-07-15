@@ -2,6 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 
 const pickColorAction = createAction('mastermind/pickColor');
 const selectCell = createAction('mastermind/selectCell');
-const setSelectedCell = createAction('mastermind/setSelectedCell');
+const removeCell = createAction('mastermind/removeCell');
+const setRow = createAction('mastermind/setRow');
 
-export { pickColorAction, selectCell, setSelectedCell };
+export { pickColorAction, selectCell, setRow, removeCell };
