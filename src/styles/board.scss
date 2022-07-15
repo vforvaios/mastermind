@@ -74,6 +74,10 @@
   color: #36c236;
   cursor: pointer;
 
+  &.smallCase {
+    font-size: 14px;
+  }
+
   &.is-disabled {
     cursor: default;
     color: #ccc;

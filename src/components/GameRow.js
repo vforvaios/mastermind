@@ -44,6 +44,7 @@ const GameRow = ({ row, index }) => {
             })}
           />
         )}
+        {currRow > index && <i className="submitRowButton smallCase">Done</i>}
       </div>
     </>
   );
