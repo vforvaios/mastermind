@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -5,6 +9,8 @@ body {
 
 @import 'src/styles/game.scss';
 @import 'src/styles/board.scss';
+@import 'src/styles/available-picking-colors.scss';
+@import 'src/styles/gamerows.scss';
 @media only screen and (min-width: 769px) {
   @import 'src/styles/responsive.scss';
 }

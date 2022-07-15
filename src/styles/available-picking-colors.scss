@@ -1,0 +1,16 @@
+.colors-container {
+  padding-right: 10px;
+  flex-basis: 70px;
+  height: 100%;
+}
+.picking-color {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+
+  &.selected {
+    border: 1px solid #000;
+  }
+}
