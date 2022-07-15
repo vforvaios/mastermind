@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+@import 'src/styles/game.scss';
+@import 'src/styles/board.scss';
+@media only screen and (min-width: 769px) {
+  @import 'src/styles/responsive.scss';
+}
