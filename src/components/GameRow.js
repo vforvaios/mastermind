@@ -18,7 +18,7 @@ const GameRow = ({ row, index }) => {
               currRow === index ? 'clickableCell' : ''
             }`}
             key={`row-${index2}-${currCellColor?.id}`}>
-            {currCellColor?.id && (
+            {currCellColor?.id && currRow === index && (
               <span
                 className="remove-color"
                 onClick={() => dispatch(removeCell(index2))}>
