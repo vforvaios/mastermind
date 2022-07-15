@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { pickColorAction, selectCell } from 'models/actions';
+import { pickColorAction, setSelectedCell } from 'models/actions';
 
 const initialState = {
   selectedColor: {},
@@ -79,16 +79,9 @@ const gameReducer = createReducer(initialState, {
     ...state,
     selectedColor: action.payload,
   }),
-  [selectCell.type]: (state, action) => ({
+  [setSelectedCell.type]: (state, action) => ({
     ...state,
-    rows: {
-      ...state?.rows,
-      [state.currentRowPlaying]: state?.rows?.[
-        state?.currentRowPlaying
-      ]?.map((cell, index) =>
-        index !== action.payload ? { ...cell } : { ...state.selectedColor },
-      ),
-    },
+    rows: action.payload,
   }),
 });
 
