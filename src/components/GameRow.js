@@ -1,4 +1,4 @@
-import { selectCell, removeCell } from 'models/actions';
+import { selectCell, removeCell, checkRow } from 'models/actions';
 import { currentRowPlaying, submitButtonIsEnabled } from 'models/selectors';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,8 @@ const GameRow = ({ row, index }) => {
 
   return (
     <>
-      <div className="row-container">
+      <div
+        className={`row-container ${currRow !== index ? 'disabled-row' : ''}`}>
         {row?.map((currCellColor, index2) => (
           <strong
             className={`curr-cell-color ${
@@ -38,7 +39,9 @@ const GameRow = ({ row, index }) => {
             className={`submitRowButton icon-ok-circle ${
               !isButtonEnabled ? 'is-disabled' : ''
             }`}
-            {...(isButtonEnabled && { onClick: () => console.log('Clicked') })}
+            {...(isButtonEnabled && {
+              onClick: () => dispatch(checkRow(index)),
+            })}
           />
         )}
       </div>
