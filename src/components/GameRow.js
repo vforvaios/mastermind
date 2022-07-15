@@ -34,12 +34,12 @@ const GameRow = ({ row, index }) => {
           </strong>
         ))}
         {currRow === index && (
-          <button
-            type="button"
-            className="submitRowButton"
-            disabled={!isButtonEnabled}>
-            Submit
-          </button>
+          <i
+            className={`submitRowButton icon-ok-circle ${
+              !isButtonEnabled ? 'is-disabled' : ''
+            }`}
+            {...(isButtonEnabled && { onClick: () => console.log('Clicked') })}
+          />
         )}
       </div>
     </>

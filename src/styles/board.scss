@@ -32,7 +32,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 2px;
   position: relative;
 }
 
@@ -44,20 +44,23 @@
 
 .remove-color {
   position: absolute;
-  top: 0;
+  top: -4px;
   right: -14px;
   cursor: pointer;
   z-index: 100;
   font-size: 14px;
 }
 
-.rows-container {
-  display: flex;
-  flex-direction: column;
-}
-
 .submitRowButton {
   position: absolute;
   right: 0;
   transform: translate(100%, 0);
+  font-size: 26px;
+  color: #36c236;
+  cursor: pointer;
+
+  &.is-disabled {
+    cursor: default;
+    color: #ccc;
+  }
 }

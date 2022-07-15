@@ -11,6 +11,12 @@
       "css": "cancel-circled",
       "code": 61550,
       "src": "mfglabs"
+    },
+    {
+      "uid": "b4cc17a45ed7d179a2cc815e2da7a383",
+      "css": "ok-circle",
+      "code": 59392,
+      "src": "iconic"
     }
   ]
 }
