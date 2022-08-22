@@ -4,6 +4,7 @@ import {
   setRow,
   checkRow,
   setCombinationUser,
+  removeCombinationUser,
 } from 'models/actions';
 
 const initialState = {
@@ -90,6 +91,10 @@ const gameReducer = createReducer(initialState, {
   [setCombinationUser.type]: (state, action) => ({
     ...state,
     combinationUser: action.payload,
+  }),
+  [removeCombinationUser.type]: (state, action) => ({
+    ...state,
+    combinationUser: {},
   }),
 });
 

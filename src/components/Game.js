@@ -1,15 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Board } from 'components';
-import { getCombinationUser } from 'models/actions';
+import { getCombinationUser, removeCurrentUser } from 'models/actions';
+import { combinationUserId } from 'models/selectors';
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useBeforeunload } from 'react-beforeunload';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Game = () => {
   const dispatch = useDispatch();
+  const userId = useSelector(combinationUserId);
 
-  // const getCombinationUser = async () => {
-  //   const tempUser = await fetch('http://localhost:8000/api/initmastermind');
-  // };
+  useBeforeunload((event) => {
+    dispatch(removeCurrentUser({ id: userId }));
+  });
 
   useEffect(() => {
     dispatch(getCombinationUser());
@@ -18,6 +21,7 @@ const Game = () => {
   return (
     <div className="game">
       <div className="board">
+        {userId}
         <Board />
       </div>
     </div>

@@ -7,6 +7,8 @@ const setRow = createAction('mastermind/setRow');
 const checkRow = createAction('mastermind/checkRow');
 const getCombinationUser = createAction('mastermind/getCombinationUser');
 const setCombinationUser = createAction('mastermind/setCombinationUser');
+const removeCurrentUser = createAction('mastermind/removeCurrentUser');
+const removeCombinationUser = createAction('mastermind/removeCombinationUser');
 
 export {
   pickColorAction,
@@ -16,4 +18,6 @@ export {
   checkRow,
   getCombinationUser,
   setCombinationUser,
+  removeCurrentUser,
+  removeCombinationUser,
 };

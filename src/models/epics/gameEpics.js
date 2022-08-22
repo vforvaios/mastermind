@@ -4,6 +4,8 @@ import {
   removeCell,
   getCombinationUser,
   setCombinationUser,
+  removeCurrentUser,
+  removeCombinationUser,
 } from 'models/actions';
 import { combineEpics, ofType } from 'redux-observable';
 import { map, withLatestFrom } from 'rxjs/operators';
@@ -65,10 +67,22 @@ const getCombinationUserEpic = (action$) =>
     map((payload) => setCombinationUser(payload)),
   );
 
+const removeCurrentUserEpic = (action$) =>
+  action$.pipe(
+    ofType(removeCurrentUser.type),
+    makeRequest(({ payload }) => ({
+      url: 'http://localhost:8000/api/removemasterminduser',
+      method: 'POST',
+      body: JSON.stringify(payload),
+    })),
+    map((payload) => removeCombinationUser(payload)),
+  );
+
 const gameEpics = combineEpics(
   selectCellEpic,
   removeCellEpic,
   getCombinationUserEpic,
+  removeCurrentUserEpic,
 );
 
 export { gameEpics };
