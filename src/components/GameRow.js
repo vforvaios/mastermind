@@ -1,6 +1,6 @@
 import { selectCell, removeCell, checkRow } from 'models/actions';
 import { currentRowPlaying, submitButtonIsEnabled } from 'models/selectors';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const GameRow = ({ row, index }) => {
@@ -13,26 +13,28 @@ const GameRow = ({ row, index }) => {
       <div
         className={`row-container ${currRow !== index ? 'disabled-row' : ''}`}>
         {row?.map((currCellColor, index2) => (
-          <strong
-            className={`curr-cell-color ${
-              currRow === index ? 'clickableCell' : ''
-            }`}
-            key={`row-${index2}-${currCellColor?.id}`}>
-            {currCellColor?.id && currRow === index && (
-              <span
-                className="remove-color"
-                onClick={() => dispatch(removeCell(index2))}>
-                <i className="icon-cancel-circled" />
-              </span>
-            )}
-            <span
-              className="color-span"
-              style={{ backgroundColor: currCellColor?.name }}
+          <Fragment key={`row-${index2}-${currCellColor?.id}`}>
+            <button
+              className={`curr-cell-color ${
+                currRow === index ? 'clickableCell' : ''
+              }`}
+              type="button"
+              style={{ background: currCellColor?.name }}
               {...(currRow === index && {
-                onClick: () => dispatch(selectCell(index2)),
-              })}
-            />
-          </strong>
+                onClick: () => {
+                  dispatch(selectCell(index2));
+                },
+              })}>
+              {currCellColor?.id && currRow === index && (
+                <span
+                  className="remove-color"
+                  onClick={() => dispatch(removeCell(index2))}>
+                  <i className="icon-cancel-circled" />
+                </span>
+              )}
+              <span className="color-span" />
+            </button>
+          </Fragment>
         ))}
         {currRow === index && (
           <i
