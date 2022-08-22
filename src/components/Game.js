@@ -11,17 +11,20 @@ const Game = () => {
   const userId = useSelector(combinationUserId);
 
   useBeforeunload((event) => {
-    dispatch(removeCurrentUser({ id: userId }));
+    if (userId) {
+      dispatch(removeCurrentUser({ id: userId }));
+    }
   });
 
   useEffect(() => {
-    dispatch(getCombinationUser());
-  }, []);
+    if (!userId) {
+      dispatch(getCombinationUser());
+    }
+  }, [userId]);
 
   return (
     <div className="game">
       <div className="board">
-        {userId}
         <Board />
       </div>
     </div>
