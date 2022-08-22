@@ -1,10 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { pickColorAction, setRow, checkRow } from 'models/actions';
+import {
+  pickColorAction,
+  setRow,
+  checkRow,
+  setCombinationUser,
+} from 'models/actions';
 
 const initialState = {
   selectedColor: {},
   currentRowPlaying: 0,
   selectedCell: 0,
+  combinationUser: {},
   rows: {
     0: [
       { id: undefined, name: undefined },
@@ -66,12 +72,6 @@ const initialState = {
       { id: undefined, name: undefined },
       { id: undefined, name: undefined },
     ],
-    10: [
-      { id: undefined, name: undefined },
-      { id: undefined, name: undefined },
-      { id: undefined, name: undefined },
-      { id: undefined, name: undefined },
-    ],
   },
 };
 const gameReducer = createReducer(initialState, {
@@ -86,6 +86,10 @@ const gameReducer = createReducer(initialState, {
   [checkRow.type]: (state, action) => ({
     ...state,
     currentRowPlaying: state?.currentRowPlaying + 1,
+  }),
+  [setCombinationUser.type]: (state, action) => ({
+    ...state,
+    combinationUser: action.payload,
   }),
 });
 

@@ -5,5 +5,15 @@ const selectCell = createAction('mastermind/selectCell');
 const removeCell = createAction('mastermind/removeCell');
 const setRow = createAction('mastermind/setRow');
 const checkRow = createAction('mastermind/checkRow');
+const getCombinationUser = createAction('mastermind/getCombinationUser');
+const setCombinationUser = createAction('mastermind/setCombinationUser');
 
-export { pickColorAction, selectCell, setRow, removeCell, checkRow };
+export {
+  pickColorAction,
+  selectCell,
+  setRow,
+  removeCell,
+  checkRow,
+  getCombinationUser,
+  setCombinationUser,
+};

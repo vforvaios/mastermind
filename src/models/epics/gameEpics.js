@@ -1,6 +1,13 @@
-import { selectCell, setRow, removeCell } from 'models/actions';
+import {
+  selectCell,
+  setRow,
+  removeCell,
+  getCombinationUser,
+  setCombinationUser,
+} from 'models/actions';
 import { combineEpics, ofType } from 'redux-observable';
 import { map, withLatestFrom } from 'rxjs/operators';
+import makeRequest from 'utils/makeRequest';
 
 const selectCellEpic = (action$, state$) =>
   action$.pipe(
@@ -48,6 +55,20 @@ const removeCellEpic = (action$, state$) =>
     ),
   );
 
-const gameEpics = combineEpics(selectCellEpic, removeCellEpic);
+const getCombinationUserEpic = (action$) =>
+  action$.pipe(
+    ofType(getCombinationUser.type),
+    makeRequest(({ payload }) => ({
+      url: 'http://localhost:8000/api/initmastermind',
+      method: 'GET',
+    })),
+    map((payload) => setCombinationUser(payload)),
+  );
+
+const gameEpics = combineEpics(
+  selectCellEpic,
+  removeCellEpic,
+  getCombinationUserEpic,
+);
 
 export { gameEpics };
