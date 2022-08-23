@@ -62,7 +62,7 @@ const getCombinationUserEpic = (action$) =>
   action$.pipe(
     ofType(getCombinationUser.type),
     makeRequest(({ payload }) => ({
-      url: 'http://192.168.1.10:8000/api/initmastermind',
+      url: 'http://127.0.0.1:8000/api/initmastermind',
       method: 'GET',
     })),
     map((payload) => setCombinationUser(payload)),
@@ -72,7 +72,7 @@ const removeCurrentUserEpic = (action$) =>
   action$.pipe(
     ofType(removeCurrentUser.type),
     makeRequest(({ payload }) => ({
-      url: 'http://192.168.1.10:8000/api/removemasterminduser',
+      url: 'http://127.0.0.1:8000/api/removemasterminduser',
       method: 'POST',
       body: JSON.stringify(payload),
     })),
