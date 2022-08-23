@@ -8,12 +8,13 @@ import {
   removeCombinationUser,
 } from 'models/actions';
 import { combineEpics, ofType } from 'redux-observable';
-import { map, withLatestFrom } from 'rxjs/operators';
+import { map, withLatestFrom, filter } from 'rxjs/operators';
 import makeRequest from 'utils/makeRequest';
 
 const selectCellEpic = (action$, state$) =>
   action$.pipe(
-    ofType(selectCell.type),
+    // ofType(selectCell.type),
+    filter(selectCell.match),
     withLatestFrom(state$),
     map(
       ([
