@@ -21,14 +21,15 @@ const GameRow = ({ row, index }) => {
               type="button"
               style={{ background: currCellColor?.name }}
               {...(currRow === index && {
-                onClick: () => {
-                  dispatch(selectCell(index2));
-                },
+                onClick: () => dispatch(selectCell(index2)),
               })}>
               {currCellColor?.id && currRow === index && (
                 <span
                   className="remove-color"
-                  onClick={() => dispatch(removeCell(index2))}>
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    dispatch(removeCell(index2));
+                  }}>
                   <i className="icon-cancel-circled" />
                 </span>
               )}
