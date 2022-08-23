@@ -8,13 +8,13 @@ import {
   removeCombinationUser,
 } from 'models/actions';
 import { combineEpics, ofType } from 'redux-observable';
-import { map, withLatestFrom, filter } from 'rxjs/operators';
+import { map, withLatestFrom } from 'rxjs/operators';
 import makeRequest from 'utils/makeRequest';
 
 const selectCellEpic = (action$, state$) =>
   action$.pipe(
-    // ofType(selectCell.type),
-    filter(selectCell.match),
+    ofType(selectCell.type),
+    // filter(selectCell.match),
     withLatestFrom(state$),
     map(
       ([
@@ -62,7 +62,7 @@ const getCombinationUserEpic = (action$) =>
   action$.pipe(
     ofType(getCombinationUser.type),
     makeRequest(({ payload }) => ({
-      url: 'http://localhost:8000/api/initmastermind',
+      url: 'http://192.168.1.10:8000/api/initmastermind',
       method: 'GET',
     })),
     map((payload) => setCombinationUser(payload)),
@@ -72,7 +72,7 @@ const removeCurrentUserEpic = (action$) =>
   action$.pipe(
     ofType(removeCurrentUser.type),
     makeRequest(({ payload }) => ({
-      url: 'http://localhost:8000/api/removemasterminduser',
+      url: 'http://192.168.1.10:8000/api/removemasterminduser',
       method: 'POST',
       body: JSON.stringify(payload),
     })),
