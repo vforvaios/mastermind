@@ -7,9 +7,11 @@ import {
   removeCurrentUser,
   removeCombinationUser,
   checkRowResults,
+  checkRow,
 } from 'models/actions';
+import { currentRowPlaying } from 'models/selectors';
 import { combineEpics, ofType } from 'redux-observable';
-import { map, withLatestFrom, ignoreElements } from 'rxjs/operators';
+import { map, withLatestFrom, concatMap } from 'rxjs/operators';
 import makeRequest from 'utils/makeRequest';
 
 const selectCellEpic = (action$, state$) =>
@@ -93,11 +95,7 @@ const checkRowResultsEpic = (action$, state$) =>
       method: 'POST',
       body: JSON.stringify(payload),
     })),
-    map(() => {
-      return {};
-    }),
-    // THIS IS ONLY UNTIL IMPLEMENTATION OF THE BACKEND
-    ignoreElements(),
+    concatMap(() => [checkRow(currentRowPlaying(state$.value))]),
   );
 
 const gameEpics = combineEpics(
