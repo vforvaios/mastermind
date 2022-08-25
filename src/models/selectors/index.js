@@ -5,7 +5,8 @@ const selectedCell = ({ gameReducer }) => gameReducer.selectedCell;
 const submitButtonIsEnabled = (state) =>
   state.gameReducer?.rows?.[currentRowPlaying(state)]?.every((cell) => cell.id);
 
-const combinationUserId = ({ gameReducer }) => gameReducer?.combinationUser?.id;
+const combinationUserId = ({ gameReducer }) => gameReducer?.combinationUser;
+const pickingColors = ({ gameReducer }) => gameReducer?.colors;
 
 export {
   selectedColor,
@@ -14,4 +15,5 @@ export {
   selectedCell,
   submitButtonIsEnabled,
   combinationUserId,
+  pickingColors,
 };

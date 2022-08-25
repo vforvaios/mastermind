@@ -1,4 +1,4 @@
-import { selectCell, removeCell, checkRow } from 'models/actions';
+import { selectCell, removeCell, checkRowResults } from 'models/actions';
 import { currentRowPlaying, submitButtonIsEnabled } from 'models/selectors';
 import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -43,7 +43,7 @@ const GameRow = ({ row, index }) => {
               !isButtonEnabled ? 'is-disabled' : ''
             }`}
             {...(isButtonEnabled && {
-              onClick: () => dispatch(checkRow(index)),
+              onClick: () => dispatch(checkRowResults(index)),
             })}
           />
         )}

@@ -23,8 +23,6 @@ const epicMiddleWare = createEpicMiddleware();
 const store = configureStore({
   reducer: persistedReducer,
   middleware: [epicMiddleWare],
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware().concat(epicMiddleWare),
   devTools: process.env.NODE_ENV !== 'production',
 });
 

@@ -6,9 +6,10 @@ import {
   setCombinationUser,
   removeCurrentUser,
   removeCombinationUser,
+  checkRowResults,
 } from 'models/actions';
 import { combineEpics, ofType } from 'redux-observable';
-import { map, withLatestFrom } from 'rxjs/operators';
+import { map, withLatestFrom, ignoreElements } from 'rxjs/operators';
 import makeRequest from 'utils/makeRequest';
 
 const selectCellEpic = (action$, state$) =>
@@ -79,11 +80,32 @@ const removeCurrentUserEpic = (action$) =>
     map((payload) => removeCombinationUser(payload)),
   );
 
+const checkRowResultsEpic = (action$, state$) =>
+  action$.pipe(
+    ofType(checkRowResults.type),
+    withLatestFrom(state$),
+    map(([{ payload }, { gameReducer: { rows, combinationUser } }]) => ({
+      user: combinationUser,
+      colors: rows?.[payload],
+    })),
+    makeRequest((payload) => ({
+      url: 'http://127.0.0.1:8000/api/checkmastermindresults',
+      method: 'POST',
+      body: JSON.stringify(payload),
+    })),
+    map(() => {
+      return {};
+    }),
+    // THIS IS ONLY UNTIL IMPLEMENTATION OF THE BACKEND
+    ignoreElements(),
+  );
+
 const gameEpics = combineEpics(
   selectCellEpic,
   removeCellEpic,
   getCombinationUserEpic,
   removeCurrentUserEpic,
+  checkRowResultsEpic,
 );
 
 export { gameEpics };

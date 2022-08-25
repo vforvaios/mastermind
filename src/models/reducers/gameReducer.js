@@ -11,7 +11,8 @@ const initialState = {
   selectedColor: {},
   currentRowPlaying: 0,
   selectedCell: 0,
-  combinationUser: {},
+  colors: [],
+  combinationUser: null,
   rows: {
     0: [
       { id: undefined, name: undefined },
@@ -90,11 +91,12 @@ const gameReducer = createReducer(initialState, {
   }),
   [setCombinationUser.type]: (state, action) => ({
     ...state,
-    combinationUser: action.payload,
+    combinationUser: action.payload.id,
+    colors: action.payload.colors,
   }),
   [removeCombinationUser.type]: (state, action) => ({
     ...state,
-    combinationUser: {},
+    combinationUser: null,
   }),
 });
 
