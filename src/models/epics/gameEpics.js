@@ -8,6 +8,7 @@ import {
   removeCombinationUser,
   checkRowResults,
   checkRow,
+  setResults,
 } from 'models/actions';
 import { currentRowPlaying } from 'models/selectors';
 import { combineEpics, ofType } from 'redux-observable';
@@ -95,7 +96,13 @@ const checkRowResultsEpic = (action$, state$) =>
       method: 'POST',
       body: JSON.stringify(payload),
     })),
-    concatMap(() => [checkRow(currentRowPlaying(state$.value))]),
+    concatMap((payload) => [
+      checkRow(currentRowPlaying(state$.value)),
+      setResults({
+        whites: payload?.whites || 0,
+        blacks: payload?.blacks || 0,
+      }),
+    ]),
   );
 
 const gameEpics = combineEpics(

@@ -5,6 +5,7 @@ import {
   checkRow,
   setCombinationUser,
   removeCombinationUser,
+  setResults,
 } from 'models/actions';
 
 const initialState = {
@@ -13,6 +14,8 @@ const initialState = {
   selectedCell: 0,
   colors: [],
   combinationUser: null,
+  whites: 0,
+  blacks: 0,
   rows: {
     0: [
       { id: undefined, name: undefined },
@@ -97,6 +100,11 @@ const gameReducer = createReducer(initialState, {
   [removeCombinationUser.type]: (state, action) => ({
     ...state,
     combinationUser: null,
+  }),
+  [setResults.type]: (state, action) => ({
+    ...state,
+    whites: action.payload.whites,
+    blacks: action.payload.blacks,
   }),
 });
 

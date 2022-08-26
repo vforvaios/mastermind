@@ -7,6 +7,8 @@ const submitButtonIsEnabled = (state) =>
 
 const combinationUserId = ({ gameReducer }) => gameReducer?.combinationUser;
 const pickingColors = ({ gameReducer }) => gameReducer?.colors;
+const whites = ({ gameReducer }) => gameReducer?.whites;
+const blacks = ({ gameReducer }) => gameReducer?.blacks;
 
 export {
   selectedColor,
@@ -16,4 +18,6 @@ export {
   submitButtonIsEnabled,
   combinationUserId,
   pickingColors,
+  whites,
+  blacks,
 };

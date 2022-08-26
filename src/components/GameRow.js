@@ -1,10 +1,17 @@
 import { selectCell, removeCell, checkRowResults } from 'models/actions';
-import { currentRowPlaying, submitButtonIsEnabled } from 'models/selectors';
+import {
+  currentRowPlaying,
+  submitButtonIsEnabled,
+  whites,
+  blacks,
+} from 'models/selectors';
 import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const GameRow = ({ row, index }) => {
   const currRow = useSelector(currentRowPlaying);
+  const whiteResults = useSelector(whites);
+  const blackResults = useSelector(blacks);
   const isButtonEnabled = useSelector(submitButtonIsEnabled);
   const dispatch = useDispatch();
 
@@ -47,7 +54,16 @@ const GameRow = ({ row, index }) => {
             })}
           />
         )}
-        {currRow > index && <i className="submitRowButton smallCase">Done</i>}
+        {currRow > index && (
+          <div className="row-results submitRowButton">
+            {[...Array(whiteResults)]?.map((white, index) => (
+              <span key={index} className="result white" />
+            ))}
+            {[...Array(blackResults)]?.map((black, index) => (
+              <span key={index} className="result black" />
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
